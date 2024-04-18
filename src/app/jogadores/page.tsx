@@ -1,22 +1,17 @@
+"use client";
 import { ListaJogadores } from "@/components/ListaJogadores";
+import { api } from "@/services/api";
+import { Jogador } from "@/types/jogador";
+import { AxiosResponse } from "axios";
+import { useState } from "react";
 
 export default function Jogadores() {
-  return (
-    <ListaJogadores
-      jogadores={[
-        {
-          nome: "Messi",
-          numeroCamisa: 10,
-          pePreferido: "esquerdo",
-          posicoes: ["Meia-esquerda", "Atacante"],
-        },
-        {
-          nome: "Cristiano",
-          numeroCamisa: 7,
-          pePreferido: "direito",
-          posicoes: ["Atacante"],
-        },
-      ]}
-    />
-  );
+  const [jogadores, setJogadores] = useState<Jogador[]>([]);
+  async function getJogadores() {
+    const { data }: AxiosResponse<Jogador[]> = await api.get("jogador");
+    setJogadores(data);
+  }
+
+  getJogadores();
+  return <ListaJogadores jogadores={jogadores} />;
 }
