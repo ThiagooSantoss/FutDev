@@ -6,7 +6,21 @@ import { AxiosResponse } from "axios";
 export const JOGADORES_KEY = "jogadores";
 
 async function getJogadores(): Promise<Jogador[]> {
-  const { data }: AxiosResponse<Jogador[]> = await api.get("jogador");
+  const { data }: AxiosResponse<Jogador[]> = await api.get("habilidades");
+  data.forEach((jogador) => {
+    if ((jogador.habilidades.length === 0)) {
+      jogador.habilidades.push({
+        id: 0,
+        chute: 0,
+        passe: 0,
+        corrida: 0,
+        dominio: 0,
+        jogador: 0,
+        cruzamento: 0,
+      });
+    }
+  });
+
   return data;
 }
 

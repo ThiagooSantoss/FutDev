@@ -1,3 +1,5 @@
+import { Habilidade } from "./habilidade";
+
 export interface Jogador {
   id: number;
   nome: string;
@@ -5,6 +7,8 @@ export interface Jogador {
   apelido: string;
   nasc: string;
   avatar: string;
+  foto: string;
   equipe: string;
+  habilidades: Habilidade[];
   posicoes: string[];
 }
