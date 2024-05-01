@@ -1,8 +1,10 @@
+import React from "react";
+import WorldFlag from "react-world-flags";
 import { Jogador } from "@/types/jogador";
 import Image from "next/image";
-
 import cardJogador from "../../public/cardJogador.png";
 import { Habilidade } from "@/types/habilidade";
+import ListaPais from "./ListaPaises";
 
 interface JogadorCardProps {
   jogador: Jogador;
@@ -11,11 +13,17 @@ interface JogadorCardProps {
 export const JogadorCard = (props: JogadorCardProps) => {
   const { jogador } = props;
 
-  const habilidadesKeys = Object.keys(jogador.habilidades[0]);
+  // const pais = jogador.nacionalidade ? jogador.nacionalidade : "null";
+  const nacionalidade = jogador.nacionalidade ? jogador.nacionalidade : "Nacionalidade não definida";
 
-  const nomesHabilidades = habilidadesKeys.map((habilidade) =>
-    habilidade.slice(0, 3).toUpperCase()
-  );
+
+  const habilidades = jogador.habilidades[0];
+  const habilidadesKeys = Object.keys(habilidades);
+
+  function simplificaNomeHabilidade(nomeHabilidade: string) {
+    return nomeHabilidade.slice(0, 3).toUpperCase();
+  }
+
 
   return (
     <li className="relative">
@@ -34,51 +42,40 @@ export const JogadorCard = (props: JogadorCardProps) => {
         height={200}
       />
 
-      <div className="absolute bottom-28 left-1/2 -translate-x-1/2 bg-red-50 w-64 h-36">
-        <div className="font-bold text-3xl mb-2 text-center">
+      <div className="absolute bottom-28 left-1/2 -translate-x-1/2 w-64 h-36">
+        <div className="font-bold text-3xl mb-2 text-center text-[#4f3422] mt-2">
           {jogador.apelido}
         </div>
 
-        <div className="flex justify-evenly">
-          {nomesHabilidades.map((nomeHabilidade) => (
+        <div className="flex justify-between">
+          {habilidadesKeys.map((nomeHabilidade) => (
             <div key={nomeHabilidade} className="flex flex-col items-center">
-              <span className="font-bold">{nomeHabilidade}</span>
+              <span className="text-xl text-[#4f3422] mt-2">
+                {simplificaNomeHabilidade(nomeHabilidade)}
+              </span>
 
-              <span className="font-extrabold text-xl"></span>
+              <span className="font-extrabold text-3xl text-[#4f3422] mt-2">
+                {habilidades[nomeHabilidade as keyof Habilidade]}
+              </span>
             </div>
           ))}
+        </div>
+
+        <div className="flex items-center justify-center mt-2">
+          <WorldFlag 
+            width={30} 
+            height={30} 
+            code={nacionalidade} />
+
+          <Image
+            className="ml-2"
+            src={`http:127.0.0.1:8000/static/game/media/uploads/${jogador.url_escudo}`}
+            alt={`foto do escudo`}
+            width={30}
+            height={30}
+          />
         </div>
       </div>
     </li>
   );
-
-  // return (
-  //   <li className="max-w-sm rounded overflow-hidden shadow-lg">
-  //     <Image
-  //       className="w-full"
-  //       src={`http://127.0.0.1:8000/static/game/media/uploads/${jogador.foto}`}
-  //       alt={`foto do jogador ${jogador.nome}`}
-  //       width={300}
-  //       height={300}
-  //     />
-  //     <div className="px-6 py-4">
-  //       <div className="font-bold text-xl mb-2">
-  //         {jogador.nome} {jogador.sobrenome}
-  //       </div>
-  //       <p className="text-gray-700 text-base mb-2">
-  //         Apelido: {jogador.apelido}
-  //       </p>
-  //       <p className="text-gray-700 text-base mb-2">
-  //         Data de Nascimento: {jogador.nasc}
-  //       </p>
-  //       <p className="text-gray-700 text-base mb-2">Equipe: {jogador.equipe}</p>
-  //       <p className="text-gray-700 text-base mb-2">
-  //         Habilidade: {jogador.habilidades[0].chute}
-  //       </p>
-  //       <p className="text-gray-700 text-base mb-2">
-  //         Posições: {jogador.posicoes.join(", ")}
-  //       </p>
-  //     </div>
-  //   </li>
-  // );
 };
