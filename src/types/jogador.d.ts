@@ -11,4 +11,8 @@ export interface Jogador {
   equipe: string;
   habilidades: Habilidade[];
   posicoes: string[];
+  url_escudo: string;
+  pais: string;
+  codigo_iso: string;
+  nacionalidade: string;
 }
