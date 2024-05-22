@@ -4,7 +4,6 @@ import { Jogador } from "@/types/jogador";
 import Image from "next/image";
 import cardJogador from "../../public/cardJogador.png";
 import { Habilidade } from "@/types/habilidade";
-import ListaPais from "./ListaPaises";
 
 interface JogadorCardProps {
   jogador: Jogador;
@@ -13,7 +12,7 @@ interface JogadorCardProps {
 export const JogadorCard = (props: JogadorCardProps) => {
   const { jogador } = props;
 
-  // const pais = jogador.nacionalidade ? jogador.nacionalidade : "null";
+ 
   const nacionalidade = jogador.nacionalidade ? jogador.nacionalidade : "Nacionalidade não definida";
 
 

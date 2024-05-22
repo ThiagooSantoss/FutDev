@@ -1,5 +1,4 @@
 import { Jogador } from "@/types/jogador";
-import Image from "next/image";
 import { JogadorCard } from "./JogadorCard";
 
 interface ListaJogadoresProps {

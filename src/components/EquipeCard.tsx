@@ -9,7 +9,8 @@ interface EquipeCardProps {
   equipe: Equipe;
 }
 
-export const EquipeCard = (props: EquipeCardProps) => {
+export const EquipeCard = (props: EquipeCardProps) => 
+  {
   const { equipe } = props;
 
   const { cores, estadio, foto, fundacao, nome } = equipe;
@@ -51,16 +52,16 @@ export const EquipeCard = (props: EquipeCardProps) => {
         className={`cursor-pointer relative w-full rounded-xl shadow-xl [transform-style:preserve-3d] ${
           virado ? "[transform:rotateY(180deg)]" : ""
         } p-8 ${
-          vendoJogadores ? "h-[600px]" : "h-[450px]"
+          vendoJogadores ? "h-[600px]" : "h-[300px]"
         } transition-all duration-700 ease-in-out`}
         style={retornaCoresCadastradas(cores)}
       >
         <Image
-          className="w-full [backface-visibility:hidden]"
+          className=" [backface-visibility:hidden]"
           src={`http://127.0.0.1:8000/static/game/media/uploads/${foto}`}
           alt={`foto do escudo`}
-          width={300}
-          height={300}
+          width={250}
+          height={250}
         />
 
         <div className="absolute inset-0 h-full w-full rounded-xl bg-black/20 text-white px-12 text-center-text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]">
