@@ -9,10 +9,13 @@ export interface Jogador {
   avatar: string;
   foto: string;
   equipe: string;
-  habilidades: Habilidade[];
   posicoes: string[];
   url_escudo: string;
   pais: string;
   codigo_iso: string;
   nacionalidade: string;
+}
+
+export interface JogadorComHabilidade extends Jogador {
+  habilidades: Habilidade[];
 }

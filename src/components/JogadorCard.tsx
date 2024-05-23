@@ -1,20 +1,20 @@
 import React from "react";
 import WorldFlag from "react-world-flags";
-import { Jogador } from "@/types/jogador";
+import { JogadorComHabilidade } from "@/types/jogador";
 import Image from "next/image";
 import cardJogador from "../../public/cardJogador.png";
 import { Habilidade } from "@/types/habilidade";
 
 interface JogadorCardProps {
-  jogador: Jogador;
+  jogador: JogadorComHabilidade;
 }
 
 export const JogadorCard = (props: JogadorCardProps) => {
   const { jogador } = props;
 
- 
-  const nacionalidade = jogador.nacionalidade ? jogador.nacionalidade : "Nacionalidade não definida";
-
+  const nacionalidade = jogador.nacionalidade
+    ? jogador.nacionalidade
+    : "Nacionalidade não definida";
 
   const habilidades = jogador.habilidades[0];
   const habilidadesKeys = Object.keys(habilidades);
@@ -22,7 +22,6 @@ export const JogadorCard = (props: JogadorCardProps) => {
   function simplificaNomeHabilidade(nomeHabilidade: string) {
     return nomeHabilidade.slice(0, 3).toUpperCase();
   }
-
 
   return (
     <li className="relative">
@@ -61,10 +60,7 @@ export const JogadorCard = (props: JogadorCardProps) => {
         </div>
 
         <div className="flex items-center justify-center mt-2">
-          <WorldFlag 
-            width={30} 
-            height={30} 
-            code={nacionalidade} />
+          <WorldFlag width={30} height={30} code={nacionalidade} />
 
           <Image
             className="ml-2"

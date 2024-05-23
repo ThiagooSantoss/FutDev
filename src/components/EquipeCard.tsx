@@ -9,8 +9,7 @@ interface EquipeCardProps {
   equipe: Equipe;
 }
 
-export const EquipeCard = (props: EquipeCardProps) => 
-  {
+export const EquipeCard = (props: EquipeCardProps) => {
   const { equipe } = props;
 
   const { cores, estadio, foto, fundacao, nome } = equipe;
@@ -49,7 +48,7 @@ export const EquipeCard = (props: EquipeCardProps) =>
       }}
     >
       <div
-        className={`cursor-pointer relative w-full rounded-xl shadow-xl [transform-style:preserve-3d] ${
+        className={`flex items-center content-center cursor-pointer relative w-full rounded-xl shadow-xl [transform-style:preserve-3d] ${
           virado ? "[transform:rotateY(180deg)]" : ""
         } p-8 ${
           vendoJogadores ? "h-[600px]" : "h-[300px]"
@@ -57,7 +56,7 @@ export const EquipeCard = (props: EquipeCardProps) =>
         style={retornaCoresCadastradas(cores)}
       >
         <Image
-          className=" [backface-visibility:hidden]"
+          className="[backface-visibility:hidden]"
           src={`http://127.0.0.1:8000/static/game/media/uploads/${foto}`}
           alt={`foto do escudo`}
           width={250}
@@ -93,22 +92,19 @@ export const EquipeCard = (props: EquipeCardProps) =>
                       <div className="w-full">
                         <h6 className="font-bold text-4xl mb-2">Titulares</h6>
 
-                        <ul className="text-left border-r border-slate-500 h-[350px]">
-                          <li className="text-xl">1 - Rogério Ceni</li>
-                          <li className="text-xl">2 - Dedé</li>
-                          <li className="text-xl">3 - Fagner</li>
-                          <li className="text-xl">4 - Roberto Carlos</li>
-                          <li className="text-xl">5 - Casemiro</li>
-                          <li className="text-xl">6 - De Bruyne</li>
-                          <li className="text-xl">7 - Tony Kross</li>
-                          <li className="text-xl">8 - Renato Augusto</li>
-                          <li className="text-xl">9 - Lionel Messi</li>
-                          <li className="text-xl">10 - Deyverson</li>
-                          <li className="text-xl">11 - Ronaldo</li>
+                        <ul className="text-left h-[350px]">
+                          {/* Remover quando tiver os reservas
+                          <ul className="text-left border-r border-slate-500 h-[350px]"> 
+                         */}
+                          {equipe.jogadores.map((jogador) => (
+                            <li key={jogador.id} className="text-xl">
+                              {jogador.apelido}
+                            </li>
+                          ))}
                         </ul>
                       </div>
 
-                      <div className="w-full">
+                      {/* <div className="w-full">
                         <h6 className="font-bold text-4xl mb-2">Reservas</h6>
 
                         <ul className="text-left h-[350px]">
@@ -124,7 +120,7 @@ export const EquipeCard = (props: EquipeCardProps) =>
                           <li className="text-xl">10 - Deyverson</li>
                           <li className="text-xl">11 - Ronaldo</li>
                         </ul>
-                      </div>
+                      </div> */}
                     </div>
 
                     <Button
