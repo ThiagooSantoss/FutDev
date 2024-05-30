@@ -139,7 +139,16 @@ export const EquipeCard = (props: EquipeCardProps) => {
                     <p className="text-base mb-2">
                       Fundado em: {dataFormatada}
                     </p>
-                    <p className="text-base mb-2">Estádio: {estadio}</p>
+                    <p className="text-base mb-2">Estádio: {estadio.nome}</p>
+                    <p className="text-base mb-2">Local: {estadio.local}</p>
+                    <p className="text-base mb-2">Capacidade: {estadio.capacidade}</p>
+                    <Image
+                      className="[backface-visibility:hidden]"
+                      src={`http://127.0.0.1:8000/static/game/media/uploads/${estadio.foto}`}
+                      alt={`foto do estádio`}
+                      width={250}
+                      height={250}
+                    />                    
 
                     <Button
                       onClick={(e) => {

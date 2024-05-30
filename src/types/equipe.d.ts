@@ -1,4 +1,5 @@
 import { Jogador } from "./jogador";
+import { Estadio } from "./estadio";
 
 export interface Equipe {
   id: number;
@@ -6,7 +7,7 @@ export interface Equipe {
   foto: string;
   nome: string;
   fundacao: string;
-  estadio: string;
+  estadio: Estadio;
   cores: string[];
   jogadores: Jogador[];
 }
