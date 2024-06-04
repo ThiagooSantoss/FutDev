@@ -37,6 +37,12 @@ export const EquipeCard = (props: EquipeCardProps) => {
     return { backgroundColor: "#ccc" };
   }
 
+  function retornaHeight() {
+    if (vendoJogadores) return "h-[600px]";
+    if (virado) return "h-[450px]";
+    return "h-[300px]";
+  }
+
   const dataFormatada = converteDataFull(fundacao);
 
   return (
@@ -50,13 +56,11 @@ export const EquipeCard = (props: EquipeCardProps) => {
       <div
         className={`flex items-center content-center cursor-pointer relative w-full rounded-xl shadow-xl [transform-style:preserve-3d] ${
           virado ? "[transform:rotateY(180deg)]" : ""
-        } p-8 ${
-          vendoJogadores ? "h-[600px]" : "h-[300px]"
-        } transition-all duration-700 ease-in-out`}
+        } p-8 ${retornaHeight()} transition-all duration-700 ease-in-out`}
         style={retornaCoresCadastradas(cores)}
       >
         <Image
-          className="[backface-visibility:hidden]"
+          className="[backface-visibility:hidden] object-cover w-full rounded-t-lg h-56 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
           src={`http://127.0.0.1:8000/static/game/media/uploads/${foto}`}
           alt={`foto do escudo`}
           width={250}
@@ -67,7 +71,7 @@ export const EquipeCard = (props: EquipeCardProps) => {
           <div className="absolute inset-0">
             <div
               className={`flex flex-col ${
-                vendoJogadores ? "mt-10" : "justify-center"
+                vendoJogadores ? "mt-10" : ""
               } items-center text-white h-full`}
             >
               <AnimatePresence>
@@ -135,20 +139,21 @@ export const EquipeCard = (props: EquipeCardProps) => {
                   </motion.div>
                 ) : (
                   <Fragment>
-                    <p className="font-bold text-xl mb-2">{nome}</p>
-                    <p className="text-base mb-2">
-                      Fundado em: {dataFormatada}
-                    </p>
-                    <p className="text-base mb-2">Estádio: {estadio.nome}</p>
-                    <p className="text-base mb-2">Local: {estadio.local}</p>
-                    <p className="text-base mb-2">Capacidade: {estadio.capacidade}</p>
                     <Image
-                      className="[backface-visibility:hidden]"
+                      className="[backface-visibility:hidden] object-cover w-full rounded-t-lg h-full max-h-48"
                       src={`http://127.0.0.1:8000/static/game/media/uploads/${estadio.foto}`}
                       alt={`foto do estádio`}
                       width={250}
                       height={250}
-                    />                    
+                    />
+
+                    <p className="font-bold text-base mb-2 mt-4">{nome}</p>
+                    <p className="text-sm mb-2">Fundado em: {dataFormatada}</p>
+                    <p className="text-sm mb-2">Estádio: {estadio.nome}</p>
+                    <p className="text-sm mb-2">Local: {estadio.local}</p>
+                    <p className="text-sm mb-2">
+                      Capacidade: {estadio.capacidade}
+                    </p>
 
                     <Button
                       onClick={(e) => {
