@@ -1,6 +1,10 @@
 import { Jogador } from "./jogador";
 import { Estadio } from "./estadio";
 
+interface Escalacao {
+  titulares: string[];
+  reservas: string[];
+}
 export interface Equipe {
   id: number;
   escudo: string;
@@ -9,5 +13,5 @@ export interface Equipe {
   fundacao: string;
   estadio: Estadio;
   cores: string[];
-  jogadores: Jogador[];
+  escalacao: Escalacao[];
 }

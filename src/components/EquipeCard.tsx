@@ -94,14 +94,14 @@ export const EquipeCard = (props: EquipeCardProps) => {
                   >
                     <div className="flex content-center items-center gap-6">
                       <div className="w-full">
-                        <h6 className="font-bold text-4xl mb-2">Titulares</h6>
+                        <h6 className="font-bold text-2xl mb-2">Titulares</h6>
 
                         <ul className="text-left h-[350px]">
                           {/* Remover quando tiver os reservas
                           <ul className="text-left border-r border-slate-500 h-[350px]"> 
                          */}
-                          {equipe.jogadores.map((jogador) => (
-                            <li key={jogador.id} className="text-xl">
+                          {equipe.escalacao.map((jogador) => (
+                            <li key={jogador.id} className="text-base">
                               {jogador.apelido}
                             </li>
                           ))}
