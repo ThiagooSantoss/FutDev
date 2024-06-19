@@ -96,35 +96,39 @@ export const EquipeCard = (props: EquipeCardProps) => {
                       <div className="w-full">
                         <h6 className="font-bold text-2xl mb-2">Titulares</h6>
 
-                        <ul className="text-left h-[350px]">
+                        <ul className="text-left mb-4">
                           {/* Remover quando tiver os reservas
                           <ul className="text-left border-r border-slate-500 h-[350px]"> 
                          */}
-                          {equipe.escalacao.map((jogador) => (
-                            <li key={jogador.id} className="text-base">
-                              {jogador.apelido}
+                          {equipe.titulares.map((jogador) => (
+                            <li
+                              onMouseOver={() => console.log("Passou o mouse")}
+                              key={jogador}
+                              className="text-base"
+                            >
+                              {jogador}
                             </li>
                           ))}
                         </ul>
-                      </div>
-
-                      {/* <div className="w-full">
-                        <h6 className="font-bold text-4xl mb-2">Reservas</h6>
-
-                        <ul className="text-left h-[350px]">
-                          <li className="text-xl">1 - Rogério Ceni</li>
-                          <li className="text-xl">2 - Dedé</li>
-                          <li className="text-xl">3 - Fagner</li>
-                          <li className="text-xl">4 - Roberto Carlos</li>
-                          <li className="text-xl">5 - Casemiro</li>
-                          <li className="text-xl">6 - De Bruyne</li>
-                          <li className="text-xl">7 - Tony Kross</li>
-                          <li className="text-xl">8 - Renato Augusto</li>
-                          <li className="text-xl">9 - Lionel Messi</li>
-                          <li className="text-xl">10 - Deyverson</li>
-                          <li className="text-xl">11 - Ronaldo</li>
+                        <h6 className="font-bold text-2xl mb-2">Reservas</h6>
+                        <ul className="text-left mb-4">
+                          {/* Remover quando tiver os reservas
+                          <ul className="text-left border-r border-slate-500 h-[350px]"> 
+                         */}
+                          {equipe.reservas.map((jogador) => (
+                            <li
+                              onMouseOver={() => console.log("Passou o mouse")}
+                              key={jogador}
+                              className="text-base"
+                            >
+                              {jogador}
+                            </li>
+                          ))}
                         </ul>
-                      </div> */}
+
+                        <h6 className="font-bold text-2xl mb-2">Treinador</h6>
+                        <span className="block mb-4">{equipe.treinador}</span>
+                      </div>
                     </div>
 
                     <Button
@@ -132,7 +136,6 @@ export const EquipeCard = (props: EquipeCardProps) => {
                         e.stopPropagation();
                         setVendoJogadores(false);
                       }}
-                      className="mt-4 mx-auto"
                     >
                       Voltar
                     </Button>
