@@ -90,10 +90,10 @@ export const EquipeCard = (props: EquipeCardProps) => {
                     exit={{
                       opacity: 0,
                     }}
-                    className="flex flex-col items-center justify-center mb-6"
+                    className="flex flex-col items-center justify-center mb-6 w-full"
                   >
-                    <div className="flex content-center items-center gap-6">
-                      <div className="w-full">
+                    <div className="flex content-center items-center gap-6 w-full">
+                      <div className="w-full m-5">
                         <h6 className="font-bold text-2xl mb-2">Titulares</h6>
 
                         <ul className="text-left mb-4">
