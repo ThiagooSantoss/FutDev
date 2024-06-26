@@ -4,18 +4,28 @@ import Image from "next/image";
 import { Fragment, useState } from "react";
 import { Button } from "./Button";
 import { AnimatePresence, motion } from "framer-motion";
+import { Tooltip } from "flowbite-react";
+import MinhaTooltip from "./MinhaTooltip";
 
 interface EquipeCardProps {
   equipe: Equipe;
 }
 
-export const EquipeCard = (props: EquipeCardProps) => {
+export const EquipeCard: React.FC<EquipeCardProps> = (
+  props: EquipeCardProps
+) => {
   const { equipe } = props;
 
   const { cores, estadio, foto, fundacao, nome } = equipe;
 
   const [virado, setVirado] = useState(false);
+  const [selectedJogador, setSelectedJogador] = useState<string | null>(null);
   const [vendoJogadores, setVendoJogadores] = useState(false);
+
+  const handleTooltipClick = (jogador: string) => {
+    console.log('Clicou no jogador:', jogador); // Console.log para verificar se está recebendo o clique
+    setSelectedJogador(jogador); // Atualiza o estado do jogador selecionado
+  };
 
   function retornaCoresCadastradas(cores: string[]) {
     if (cores.length === 1) {
@@ -101,13 +111,15 @@ export const EquipeCard = (props: EquipeCardProps) => {
                           <ul className="text-left border-r border-slate-500 h-[350px]"> 
                          */}
                           {equipe.titulares.map((jogador) => (
-                            <li
-                              onMouseOver={() => console.log("Passou o mouse")}
+                            <MinhaTooltip
                               key={jogador}
-                              className="text-base"
+                              content={<h1 className="text-xl">{jogador}</h1>}
+                              onClick={() => handleTooltipClick(jogador)}
                             >
-                              {jogador}
-                            </li>
+                              <li className="text-base cursor-pointer">
+                                {jogador}
+                              </li>
+                            </MinhaTooltip>
                           ))}
                         </ul>
                         <h6 className="font-bold text-2xl mb-2">Reservas</h6>
