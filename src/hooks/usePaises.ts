@@ -6,7 +6,7 @@ import { AxiosResponse } from "axios";
 export const PAIS_KEY = "pais";
 
 async function getPaises(): Promise<Paises[]> {
-  const { data }: AxiosResponse<Paises[]> = await api.get("pais");
+  const { data }: AxiosResponse<Paises[]> = await api.get("paises");
 
   return data;
 }

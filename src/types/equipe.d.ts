@@ -10,6 +10,6 @@ export interface Equipe {
   treinador: string;
   estadio: Estadio;
   cores: string[];
-  titulares: string[];
-  reservas: string[];
+  titulares: Jogador[];
+  reservas: Jogador[];
 }

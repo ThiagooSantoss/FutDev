@@ -4,8 +4,7 @@ import Image from "next/image";
 import { Fragment, useState } from "react";
 import { Button } from "./Button";
 import { AnimatePresence, motion } from "framer-motion";
-import { Tooltip } from "flowbite-react";
-import MinhaTooltip from "./MinhaTooltip";
+import { CardJogadorTooltip } from "./CardJogadorTooltip";
 
 interface EquipeCardProps {
   equipe: Equipe;
@@ -23,7 +22,7 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
   const [vendoJogadores, setVendoJogadores] = useState(false);
 
   const handleTooltipClick = (jogador: string) => {
-    console.log('Clicou no jogador:', jogador); // Console.log para verificar se está recebendo o clique
+    console.log("Clicou no jogador:", jogador); // Console.log para verificar se está recebendo o clique
     setSelectedJogador(jogador); // Atualiza o estado do jogador selecionado
   };
 
@@ -107,34 +106,26 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
                         <h6 className="font-bold text-2xl mb-2">Titulares</h6>
 
                         <ul className="text-left mb-4">
-                          {/* Remover quando tiver os reservas
-                          <ul className="text-left border-r border-slate-500 h-[350px]"> 
-                         */}
                           {equipe.titulares.map((jogador) => (
-                            <MinhaTooltip
-                              key={jogador}
-                              content={<h1 className="text-xl">{jogador}</h1>}
-                              onClick={() => handleTooltipClick(jogador)}
+                            <CardJogadorTooltip
+                              key={jogador.id}
+                              jogador={jogador}
                             >
-                              <li className="text-base cursor-pointer">
-                                {jogador}
-                              </li>
-                            </MinhaTooltip>
+                              <li>{jogador.nome}</li>
+                            </CardJogadorTooltip>
                           ))}
                         </ul>
+
                         <h6 className="font-bold text-2xl mb-2">Reservas</h6>
+
                         <ul className="text-left mb-4">
-                          {/* Remover quando tiver os reservas
-                          <ul className="text-left border-r border-slate-500 h-[350px]"> 
-                         */}
                           {equipe.reservas.map((jogador) => (
-                            <li
-                              onMouseOver={() => console.log("Passou o mouse")}
-                              key={jogador}
-                              className="text-base"
+                            <CardJogadorTooltip
+                              key={jogador.id}
+                              jogador={jogador}
                             >
-                              {jogador}
-                            </li>
+                              <li>{jogador.nome}</li>
+                            </CardJogadorTooltip>
                           ))}
                         </ul>
 

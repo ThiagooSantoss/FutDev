@@ -14,8 +14,13 @@ export interface Jogador {
   pais: string;
   codigo_iso: string;
   nacionalidade: string;
+  habilidades: Habilidade[];
 }
 
-export interface JogadorComHabilidade extends Jogador {
-  habilidades: Habilidade[];
+export interface Habilidade {
+  chute: number;
+  passe: number;
+  dominio: number;
+  corrida: number;
+  cruzamento: number;
 }

@@ -1,12 +1,11 @@
 import React from "react";
 import WorldFlag from "react-world-flags";
-import { JogadorComHabilidade } from "@/types/jogador";
 import Image from "next/image";
 import cardJogador from "../../public/cardJogador.png";
-import { Habilidade } from "@/types/habilidade";
+import { Habilidade, Jogador } from "@/types/jogador";
 
 interface JogadorCardProps {
-  jogador: JogadorComHabilidade;
+  jogador: Jogador;
 }
 
 export const JogadorCard = (props: JogadorCardProps) => {
@@ -24,7 +23,7 @@ export const JogadorCard = (props: JogadorCardProps) => {
   }
 
   return (
-    <li className="relative">
+    <div className="relative">
       <Image
         src={cardJogador}
         alt={"Card do jogador"}
@@ -71,6 +70,6 @@ export const JogadorCard = (props: JogadorCardProps) => {
           />
         </div>
       </div>
-    </li>
+    </div>
   );
 };
