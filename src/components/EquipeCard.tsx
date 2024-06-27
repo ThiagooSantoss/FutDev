@@ -18,13 +18,7 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
   const { cores, estadio, foto, fundacao, nome } = equipe;
 
   const [virado, setVirado] = useState(false);
-  const [selectedJogador, setSelectedJogador] = useState<string | null>(null);
   const [vendoJogadores, setVendoJogadores] = useState(false);
-
-  const handleTooltipClick = (jogador: string) => {
-    console.log("Clicou no jogador:", jogador); // Console.log para verificar se está recebendo o clique
-    setSelectedJogador(jogador); // Atualiza o estado do jogador selecionado
-  };
 
   function retornaCoresCadastradas(cores: string[]) {
     if (cores.length === 1) {
