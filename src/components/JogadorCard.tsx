@@ -15,7 +15,7 @@ export const JogadorCard = (props: JogadorCardProps) => {
     ? jogador.nacionalidade
     : "Nacionalidade não definida";
 
-  const habilidades = jogador.habilidades[0];
+  const habilidades = jogador.habilidades;
   const habilidadesKeys = Object.keys(habilidades);
 
   function simplificaNomeHabilidade(nomeHabilidade: string) {
@@ -34,16 +34,21 @@ export const JogadorCard = (props: JogadorCardProps) => {
       <Image
         className="absolute top-16 left-1/2 -translate-x-1/2 rounded-full"
         src={`http://127.0.0.1:8000/static/game/media/uploads/${jogador.foto}`}
-        alt={`foto do jogador ${jogador.nome}`}
+        alt={`foto do jogador ${jogador.apelido}`}
         width={200}
         height={200}
       />
 
       <div className="absolute bottom-28 left-1/2 -translate-x-1/2 w-64 h-36">
-        <div className="font-bold text-3xl mb-2 text-center text-[#4f3422] mt-2">
+        <div className="font-bold text-3xl mb-2 text-center text-[#4f3422]">
           {jogador.apelido}
         </div>
-
+        <div className="flex items-center gap-1 justify-center">
+          <span className="text-xl text-[#4f3422] ">OVR</span>
+          <span className="font-extrabold text-2xl text-[#4f3422]">
+            {jogador.overall}
+          </span>
+        </div>
         <div className="flex justify-between">
           {habilidadesKeys.map((nomeHabilidade) => (
             <div key={nomeHabilidade} className="flex flex-col items-center">
@@ -51,7 +56,7 @@ export const JogadorCard = (props: JogadorCardProps) => {
                 {simplificaNomeHabilidade(nomeHabilidade)}
               </span>
 
-              <span className="font-extrabold text-3xl text-[#4f3422] mt-2">
+              <span className="font-extrabold text-2xl text-[#4f3422] mt-1">
                 {habilidades[nomeHabilidade as keyof Habilidade]}
               </span>
             </div>

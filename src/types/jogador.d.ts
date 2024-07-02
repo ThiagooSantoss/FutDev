@@ -15,6 +15,7 @@ export interface Jogador {
   codigo_iso: string;
   nacionalidade: string;
   habilidades: Habilidade[];
+  overall: number;
 }
 
 export interface Habilidade {

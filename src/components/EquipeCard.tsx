@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Fragment, useState } from "react";
 import { Button } from "./Button";
 import { AnimatePresence, motion } from "framer-motion";
-import { CardJogadorTooltip } from "./CardJogadorTooltip";
+import { CardJogadorPopover } from "./CardJogadorPopover";
 
 interface EquipeCardProps {
   equipe: Equipe;
@@ -101,12 +101,12 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
 
                         <ul className="text-left mb-4">
                           {equipe.titulares.map((jogador) => (
-                            <CardJogadorTooltip
+                            <CardJogadorPopover
                               key={jogador.id}
                               jogador={jogador}
                             >
-                              <li>{jogador.nome}</li>
-                            </CardJogadorTooltip>
+                              <li>{jogador.apelido}</li>
+                            </CardJogadorPopover>
                           ))}
                         </ul>
 
@@ -114,12 +114,12 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
 
                         <ul className="text-left mb-4">
                           {equipe.reservas.map((jogador) => (
-                            <CardJogadorTooltip
+                            <CardJogadorPopover
                               key={jogador.id}
                               jogador={jogador}
                             >
-                              <li>{jogador.nome}</li>
-                            </CardJogadorTooltip>
+                              <li>{jogador.apelido}</li>
+                            </CardJogadorPopover>
                           ))}
                         </ul>
 

@@ -1,34 +1,28 @@
 import { Jogador } from "@/types/jogador";
-import { Tooltip, TooltipProps } from "flowbite-react";
+import { Popover } from "flowbite-react";
 import React, { FC, ReactNode } from "react";
 import { JogadorCard } from "./JogadorCard";
 
-interface MinhaTooltipProps {
+interface MinhaPopoverProps {
   children: ReactNode;
   jogador: Jogador;
-  tooltipProps?: TooltipProps;
 }
 
-export const CardJogadorTooltip: FC<MinhaTooltipProps> = ({
+export const CardJogadorPopover: FC<MinhaPopoverProps> = ({
   children,
   jogador,
-  tooltipProps,
 }) => {
   return (
-    <Tooltip
+    <Popover
+      trigger="hover"
       arrow={false}
       theme={{
         base: "bg-none w-[400px] h-[558px]",
-        style: {
-          auto: "bg-none",
-          dark: "bg-none",
-          light: "bg-none",
-        },
       }}
       content={<JogadorCard jogador={jogador} />}
-      {...tooltipProps}
+   
     >
       {children}
-    </Tooltip>
+    </Popover>
   );
 };
