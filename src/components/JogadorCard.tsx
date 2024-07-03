@@ -2,7 +2,7 @@ import React from "react";
 import WorldFlag from "react-world-flags";
 import Image from "next/image";
 import cardJogador from "../../public/cardJogador.png";
-import { Habilidade, Jogador } from "@/types/jogador";
+import { Habilidades, Jogador } from "@/types/jogador";
 
 interface JogadorCardProps {
   jogador: Jogador;
@@ -46,7 +46,7 @@ export const JogadorCard = (props: JogadorCardProps) => {
         <div className="flex items-center gap-1 justify-center">
           <span className="text-xl text-[#4f3422] ">OVR</span>
           <span className="font-extrabold text-2xl text-[#4f3422]">
-            {jogador.overall}
+            {Math.round(jogador.overall)}
           </span>
         </div>
         <div className="flex justify-between">
@@ -57,7 +57,7 @@ export const JogadorCard = (props: JogadorCardProps) => {
               </span>
 
               <span className="font-extrabold text-2xl text-[#4f3422] mt-1">
-                {habilidades[nomeHabilidade as keyof Habilidade]}
+                {habilidades[nomeHabilidade as keyof Habilidades]}
               </span>
             </div>
           ))}
