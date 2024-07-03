@@ -20,7 +20,6 @@ export const CardJogadorPopover: FC<MinhaPopoverProps> = ({
         base: "bg-none w-[400px] h-[558px]",
       }}
       content={<JogadorCard jogador={jogador} />}
-   
     >
       {children}
     </Popover>

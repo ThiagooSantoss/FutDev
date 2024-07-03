@@ -1,5 +1,3 @@
-import { Habilidade } from "./habilidade";
-
 export interface Jogador {
   id: number;
   nome: string;
@@ -14,11 +12,11 @@ export interface Jogador {
   pais: string;
   codigo_iso: string;
   nacionalidade: string;
-  habilidades: Habilidade[];
+  habilidades: Habilidades;
   overall: number;
 }
 
-export interface Habilidade {
+export interface Habilidades {
   chute: number;
   passe: number;
   dominio: number;
