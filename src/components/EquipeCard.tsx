@@ -50,7 +50,9 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
 
   return (
     <li
-      className={`group h-fit [perspective:1000px]`}
+      className={`group h-fit [perspective:1000px] ${
+        vendoJogadores ? "z-10" : "z-0"
+      }`}
       onClick={() => {
         setVirado(!virado);
         setVendoJogadores(false);
@@ -99,7 +101,7 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
                       <div className="w-full m-5">
                         <h6 className="font-bold text-2xl mb-2">Titulares</h6>
 
-                        <ul className="text-left mb-4">
+                        <ul className="flex flex-col gap-2 text-left mb-4">
                           {equipe.titulares.map((jogador) => (
                             <CardJogadorPopover
                               key={jogador.id}

@@ -1,8 +1,8 @@
 import React from "react";
-import WorldFlag from "react-world-flags";
 import Image from "next/image";
 import cardJogador from "../../public/cardJogador.png";
 import { Habilidades, Jogador } from "@/types/jogador";
+import ReactCountryFlag from "react-country-flag";
 
 interface JogadorCardProps {
   jogador: Jogador;
@@ -10,10 +10,6 @@ interface JogadorCardProps {
 
 export const JogadorCard = (props: JogadorCardProps) => {
   const { jogador } = props;
-
-  const nacionalidade = jogador.nacionalidade
-    ? jogador.nacionalidade
-    : "Nacionalidade não definida";
 
   const habilidades = jogador.habilidades;
   const habilidadesKeys = Object.keys(habilidades);
@@ -32,23 +28,25 @@ export const JogadorCard = (props: JogadorCardProps) => {
       />
 
       <Image
-        className="absolute top-16 left-1/2 -translate-x-1/2 rounded-full"
+        className="absolute top-[46px] left-56 -translate-x-1/2"
         src={`http://127.0.0.1:8000/static/game/media/uploads/${jogador.foto}`}
         alt={`foto do jogador ${jogador.apelido}`}
-        width={200}
-        height={200}
+        width={250}
+        height={250}
       />
 
-      <div className="absolute bottom-28 left-1/2 -translate-x-1/2 w-64 h-36">
+      <div className="absolute top-24 left-14 flex flex-col items-center gap-1 justify-center">
+        <span className="text-2xl text-[#4f3422]">OVR</span>
+        <span className="font-extrabold text-5xl text-[#4f3422]">
+          {Math.round(jogador.overall)}
+        </span>
+      </div>
+
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-80">
         <div className="font-bold text-3xl mb-2 text-center text-[#4f3422]">
           {jogador.apelido}
         </div>
-        <div className="flex items-center gap-1 justify-center">
-          <span className="text-xl text-[#4f3422] ">OVR</span>
-          <span className="font-extrabold text-2xl text-[#4f3422]">
-            {Math.round(jogador.overall)}
-          </span>
-        </div>
+
         <div className="flex justify-between">
           {habilidadesKeys.map((nomeHabilidade) => (
             <div key={nomeHabilidade} className="flex flex-col items-center">
@@ -56,22 +54,25 @@ export const JogadorCard = (props: JogadorCardProps) => {
                 {simplificaNomeHabilidade(nomeHabilidade)}
               </span>
 
-              <span className="font-extrabold text-2xl text-[#4f3422] mt-1">
+              <span className="font-extrabold text-3xl text-[#4f3422] mt-1">
                 {habilidades[nomeHabilidade as keyof Habilidades]}
               </span>
             </div>
           ))}
         </div>
 
-        <div className="flex items-center justify-center mt-2">
-          <WorldFlag width={30} height={30} code={nacionalidade} />
+        <div className="flex items-center gap-2 justify-center mt-2">
+          <ReactCountryFlag
+            className="text-5xl"
+            countryCode={jogador.nacionalidade}
+            svg
+          />
 
           <Image
-            className="ml-2"
             src={`http:127.0.0.1:8000/static/game/media/uploads/${jogador.url_escudo}`}
             alt={`foto do escudo`}
-            width={30}
-            height={30}
+            width={48}
+            height={48}
           />
         </div>
       </div>
