@@ -1,3 +1,5 @@
+"use client";
+
 import { Equipe } from "@/types/equipe";
 import { converteDataFull } from "@/utils/converteDataFull";
 import Image from "next/image";
@@ -100,7 +102,6 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
                     <div className="flex content-center items-center gap-6 w-full">
                       <div className="w-full m-5">
                         <h6 className="font-bold text-2xl mb-2">Titulares</h6>
-
                         <ul className="flex flex-col gap-2 text-left mb-4">
                           {equipe.titulares.map((jogador) => (
                             <CardJogadorPopover
@@ -111,9 +112,7 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
                             </CardJogadorPopover>
                           ))}
                         </ul>
-
                         <h6 className="font-bold text-2xl mb-2">Reservas</h6>
-
                         <ul className="text-left mb-4">
                           {equipe.reservas.map((jogador) => (
                             <CardJogadorPopover
@@ -124,12 +123,10 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
                             </CardJogadorPopover>
                           ))}
                         </ul>
-
                         <h6 className="font-bold text-2xl mb-2">Treinador</h6>
                         <span className="block mb-4">{equipe.treinador}</span>
                       </div>
                     </div>
-
                     <Button
                       onClick={(e) => {
                         e.stopPropagation();

@@ -1,10 +1,9 @@
-"use client";
-
 import { EquipeCard } from "@/components/EquipeCard";
-import { useEquipes } from "@/hooks/useEquipes";
+import { Equipe } from "@/types/equipe";
+import { fetchWrapper } from "@/utils/fetchWrapper";
 
-export default function Equipes() {
-  const { data: equipes } = useEquipes();
+export default async function Equipes() {
+  const equipes = await fetchWrapper<Equipe[]>("/equipes");
 
   return (
     <div className="h-svh bg-zinc-50 p-20">

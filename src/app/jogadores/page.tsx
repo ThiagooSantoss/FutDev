@@ -1,9 +1,9 @@
-"use client";
-
 import { ListaJogadores } from "@/components/ListaJogadores";
-import { useJogadores } from "@/hooks/useJogadores";
+import { Jogador } from "@/types/jogador";
+import { fetchWrapper } from "@/utils/fetchWrapper";
 
-export default function Jogadores() {
-  const { data: jogadores } = useJogadores();
+export default async function Jogadores() {
+  const jogadores = await fetchWrapper<Jogador[]>("/jogadores");
+
   return <ListaJogadores jogadores={jogadores} />;
 }
