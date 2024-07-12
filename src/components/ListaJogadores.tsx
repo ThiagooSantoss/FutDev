@@ -1,8 +1,8 @@
-import { JogadorComHabilidade } from "@/types/jogador";
+import { Jogador } from "@/types/jogador";
 import { JogadorCard } from "./JogadorCard";
 
 interface ListaJogadoresProps {
-  jogadores: JogadorComHabilidade[];
+  jogadores: Jogador[];
 }
 export const ListaJogadores = (props: ListaJogadoresProps) => {
   const { jogadores } = props;
