@@ -1,19 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Tipo = "geral" | "equipes" | "jogadores" | "treinadores";
 
 export const SearchBar = () => {
   const [tipo, setTipo] = useState<Tipo>("geral");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const router = useRouter();
 
   const opcoesDropdown = [
     { texto: "Geral", onClick: () => setTipo("geral") },
-    { texto: "Equipe", onClick: () => setTipo("equipes") },
+    { texto: "Equipes", onClick: () => setTipo("equipes") },
     { texto: "Jogadores", onClick: () => setTipo("jogadores") },
     { texto: "Treinadores", onClick: () => setTipo("treinadores") },
   ];
+
+  const handleButtonClick = () => {
+    if (tipo === "jogadores") {
+      router.push("/jogadores");
+    }
+  };
 
   return (
     <form className="max-w-lg mx-auto">
@@ -35,9 +43,9 @@ export const SearchBar = () => {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="m1 1 4 4 4-4"
             />
           </svg>
@@ -58,6 +66,9 @@ export const SearchBar = () => {
                     className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     onClick={() => {
                       item.onClick();
+                      if (item.texto === "Jogadores") {
+                        handleButtonClick();
+                      }
                       setIsDropdownOpen(false);
                     }}
                   >
@@ -73,7 +84,7 @@ export const SearchBar = () => {
           <input
             type="search"
             id="search-dropdown"
-            className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+            className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
             placeholder="Procure por equipes, jogadores ou treinadores..."
             required
           />
