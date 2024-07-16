@@ -53,7 +53,7 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
   return (
     <li
       className={`group h-fit [perspective:1000px] ${
-        vendoJogadores ? "z-10" : "z-0"
+        vendoJogadores ? "z-[1000]" : "z-0"
       }`}
       onClick={() => {
         setVirado(!virado);
