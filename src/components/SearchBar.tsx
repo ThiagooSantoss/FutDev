@@ -1,14 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 type Tipo = "geral" | "equipes" | "jogadores" | "treinadores";
 
-export const SearchBar = () => {
+interface SearchBarProps {
+  search: string;
+  setSearch: (search: string) => void;
+}
+
+export const SearchBar = ({ search, setSearch }: SearchBarProps) => {
   const [tipo, setTipo] = useState<Tipo>("geral");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const router = useRouter();
 
   const opcoesDropdown = [
     { texto: "Geral", onClick: () => setTipo("geral") },
@@ -16,12 +19,6 @@ export const SearchBar = () => {
     { texto: "Jogadores", onClick: () => setTipo("jogadores") },
     { texto: "Treinadores", onClick: () => setTipo("treinadores") },
   ];
-
-  const handleButtonClick = () => {
-    if (tipo === "jogadores") {
-      router.push("/jogadores");
-    }
-  };
 
   return (
     <form className="max-w-lg mx-auto">
@@ -66,9 +63,7 @@ export const SearchBar = () => {
                     className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     onClick={() => {
                       item.onClick();
-                      if (item.texto === "Jogadores") {
-                        handleButtonClick();
-                      }
+
                       setIsDropdownOpen(false);
                     }}
                   >
@@ -81,10 +76,12 @@ export const SearchBar = () => {
         )}
 
         <div className="relative w-full">
-          <input
+          <input 
+            onChange={(e) => setSearch(e.currentTarget.value)}
             type="search"
             id="search-dropdown"
             className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+            value={search}
             placeholder="Procure por equipes, jogadores ou treinadores..."
             required
           />
