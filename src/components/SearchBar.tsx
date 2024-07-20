@@ -1,24 +1,15 @@
 "use client";
 
-import { useState } from "react";
-
-type Tipo = "geral" | "equipes" | "jogadores" | "treinadores";
+import { Dispatch, SetStateAction, useState } from "react";
+import { SearchProps, SearchTipos } from "./EquipesFiltroResultado";
 
 interface SearchBarProps {
-  search: string;
-  setSearch: (search: string) => void;
+  search: SearchProps;
+  setSearch: Dispatch<SetStateAction<SearchProps>>;
 }
 
 export const SearchBar = ({ search, setSearch }: SearchBarProps) => {
-  const [tipo, setTipo] = useState<Tipo>("geral");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const opcoesDropdown = [
-    { texto: "Geral", onClick: () => setTipo("geral") },
-    { texto: "Equipes", onClick: () => setTipo("equipes") },
-    { texto: "Jogadores", onClick: () => setTipo("jogadores") },
-    { texto: "Treinadores", onClick: () => setTipo("treinadores") },
-  ];
 
   return (
     <form className="max-w-lg mx-auto">
@@ -30,7 +21,7 @@ export const SearchBar = ({ search, setSearch }: SearchBarProps) => {
           type="button"
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         >
-          {tipo}
+          {search.tipo}
           <svg
             className="w-2.5 h-2.5 ms-2.5"
             aria-hidden="true"
@@ -47,27 +38,28 @@ export const SearchBar = ({ search, setSearch }: SearchBarProps) => {
             />
           </svg>
         </button>
+
         {isDropdownOpen && (
-          <div
-            id="dropdown"
-            className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 absolute top-10 block"
-          >
+          <div className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 absolute top-10 block">
             <ul
               className="py-2 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdown-button"
             >
-              {opcoesDropdown.map((item) => (
-                <li key={item.texto}>
+              {Object.values(SearchTipos).map((item) => (
+                <li key={item}>
                   <button
                     type="button"
                     className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     onClick={() => {
-                      item.onClick();
+                      setSearch((prevState) => ({
+                        ...prevState,
+                        tipo: item,
+                      }));
 
                       setIsDropdownOpen(false);
                     }}
                   >
-                    {item.texto}
+                    {item}
                   </button>
                 </li>
               ))}
@@ -76,14 +68,19 @@ export const SearchBar = ({ search, setSearch }: SearchBarProps) => {
         )}
 
         <div className="relative w-full">
-          <input 
-            onChange={(e) => setSearch(e.currentTarget.value)}
+          <input
+            onChange={(e) => {
+              const newValue = e.currentTarget.value;
+
+              setSearch((prevState) => ({
+                ...prevState,
+                texto: newValue,
+              }));
+            }}
             type="search"
-            id="search-dropdown"
             className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-            value={search}
+            value={search.texto}
             placeholder="Procure por equipes, jogadores ou treinadores..."
-            required
           />
         </div>
       </div>
