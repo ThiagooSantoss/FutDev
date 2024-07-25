@@ -44,19 +44,39 @@ export const EquipesFiltroResultado = ({
       return;
     }
 
+    if (search.tipo === SearchTipos.Treinadores) {
+      equipesTemp = equipes.filter((equipe) =>
+        equipe.treinador.toLowerCase().includes(search.texto)
+      );
+
+      setEquipesParaMostrar(equipesTemp);
+      return;
+    }
+
+    if (search.tipo === SearchTipos.Jogadores) {
+      equipesTemp = equipes.filter((equipe) => {
+        const todosJogadores = [...equipe.titulares, ...equipe.reservas];
+
+        return todosJogadores.some((jogador) =>
+          jogador.apelido.toLowerCase().includes(search.texto.toLowerCase())
+        );
+      });
+
+      setEquipesParaMostrar(equipesTemp);
+      return;
+    }
+
     setEquipesParaMostrar(equipes);
   }, [search, equipes]);
-
-  console.log(equipesParaMostrar);
 
   return (
     <div>
       <SearchBar search={search} setSearch={setSearch} />
 
       <ul className="flex flex-wrap gap-8">
-        {equipesParaMostrar.map((equipe) => (
+        {equipesParaMostrar.length > 0 ? equipesParaMostrar.map((equipe) => (
           <EquipeCard key={equipe.id} equipe={equipe} />
-        ))}
+        )): <h3>Resultado não encontrado</h3>}
       </ul>
     </div>
   );

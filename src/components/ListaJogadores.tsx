@@ -6,6 +6,8 @@ interface ListaJogadoresProps {
 }
 export const ListaJogadores = (props: ListaJogadoresProps) => {
   const { jogadores } = props;
+  console.log(jogadores);
+  
 
   return (
     <ul className="flex flex-wrap gap-8 p-20">
