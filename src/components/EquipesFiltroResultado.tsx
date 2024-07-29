@@ -74,9 +74,13 @@ export const EquipesFiltroResultado = ({
       <SearchBar search={search} setSearch={setSearch} />
 
       <ul className="flex flex-wrap gap-8">
-        {equipesParaMostrar.length > 0 ? equipesParaMostrar.map((equipe) => (
-          <EquipeCard key={equipe.id} equipe={equipe} />
-        )): <h3>Resultado não encontrado</h3>}
+        {equipesParaMostrar && equipesParaMostrar.length > 0 ? (
+          equipesParaMostrar.map((equipe) => (
+            <EquipeCard key={equipe.id} equipe={equipe} />
+          ))
+        ) : (
+          <h3>Resultado não encontrado</h3>
+        )}
       </ul>
     </div>
   );
