@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchBar } from "./SearchBar";
 import { Equipe } from "@/types/equipe";
 import { EquipeCard } from "./EquipeCard";
@@ -21,9 +21,9 @@ export interface SearchProps {
   tipo: SearchTipos;
 }
 
-export const EquipesFiltroResultado = ({
+const EquipesFiltroResultado: React.FC<EquipesFiltroResultadoProps> = ({
   equipes,
-}: EquipesFiltroResultadoProps) => {
+}) => {
   const [search, setSearch] = useState<SearchProps>({
     texto: "",
     tipo: SearchTipos.Geral,
@@ -32,54 +32,63 @@ export const EquipesFiltroResultado = ({
   const [equipesParaMostrar, setEquipesParaMostrar] =
     useState<Equipe[]>(equipes);
 
-    useEffect(() => {
-      const filtrarEquipes = () => {
-        if (search.texto.trim() === '') {
-          return equipes;
+  useEffect(() => {
+    const filtrarEquipes = () => {
+      if (search.texto.trim() === "") {
+        return equipes;
+      }
+
+      return equipes.filter((equipe) => {
+        const todosJogadores = [...equipe.titulares, ...equipe.reservas];
+        const textoLower = search.texto.toLowerCase();
+
+        const nomeEquipe = equipe.nome.toLowerCase().includes(textoLower);
+        const nomeTreinador = equipe.treinador
+          .toLowerCase()
+          .includes(textoLower);
+        const jogadorEncontrado = todosJogadores.some((jogador) =>
+          jogador.apelido.toLowerCase().includes(textoLower)
+        );
+
+        if (search.tipo === SearchTipos.Equipes) {
+          return nomeEquipe;
         }
-    
-        return equipes.filter((equipe) => {
-          const todosJogadores = [...equipe.titulares, ...equipe.reservas];
-          const textoLower = search.texto.toLowerCase();
-    
-          const nomeEquipe = equipe.nome.toLowerCase().includes(textoLower);
-          const nomeTreinador = equipe.treinador.toLowerCase().includes(textoLower);
-          const jogadorEncontrado = todosJogadores.some((jogador) =>
-            jogador.apelido.toLowerCase().includes(textoLower)
-          );
-    
-          if (search.tipo === SearchTipos.Equipes) {
-            return nomeEquipe;
-          }
-    
-          if (search.tipo === SearchTipos.Treinadores) {
-            return nomeTreinador;
-          }
-    
-          if (search.tipo === SearchTipos.Jogadores) {
-            return jogadorEncontrado;
-          }
-    
-          if (search.tipo === SearchTipos.Geral) {
-            return nomeEquipe || nomeTreinador || jogadorEncontrado;
-          }
-    
-          return false;
-        });
-      };
-    
-      const equipesFiltradas = filtrarEquipes();
-      setEquipesParaMostrar(equipesFiltradas);
-    }, [search, equipes]);
+
+        if (search.tipo === SearchTipos.Treinadores) {
+          return nomeTreinador;
+        }
+
+        if (search.tipo === SearchTipos.Jogadores) {
+          return jogadorEncontrado;
+        }
+
+        if (search.tipo === SearchTipos.Geral) {
+          return nomeEquipe || nomeTreinador || jogadorEncontrado;
+        }
+
+        return false;
+      });
+    };
+
+    const equipesFiltradas = filtrarEquipes();
+    setEquipesParaMostrar(equipesFiltradas);
+  }, [search, equipes]);
+
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>, id: number) => {
+    e.dataTransfer.setData("text/plain", id.toString());
+  };
 
   return (
     <div>
       <SearchBar search={search} setSearch={setSearch} />
-
       <ul className="flex flex-wrap gap-8">
         {equipesParaMostrar && equipesParaMostrar.length > 0 ? (
           equipesParaMostrar.map((equipe) => (
-            <EquipeCard key={equipe.id} equipe={equipe} />
+            <EquipeCard
+              key={equipe.id}
+              equipe={equipe}
+              onDragStart={handleDragStart}
+            />
           ))
         ) : (
           <h3>Resultado não encontrado</h3>
@@ -88,3 +97,5 @@ export const EquipesFiltroResultado = ({
     </div>
   );
 };
+
+export default EquipesFiltroResultado;

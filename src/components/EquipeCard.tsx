@@ -10,14 +10,15 @@ import { CardJogadorPopover } from "./CardJogadorPopover";
 
 interface EquipeCardProps {
   equipe: Equipe;
+  onDragStart: (e: React.DragEvent<HTMLDivElement>, id: number) => void;
 }
 
 export const EquipeCard: React.FC<EquipeCardProps> = (
   props: EquipeCardProps
 ) => {
-  const { equipe } = props;
+  const { equipe, onDragStart } = props;
 
-  const { cores, estadio, foto, fundacao, nome } = equipe;
+  const { cores = [], estadio, foto, fundacao, nome } = equipe;
 
   const [virado, setVirado] = useState(false);
   const [vendoJogadores, setVendoJogadores] = useState(false);
@@ -62,6 +63,7 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
     >
       <div
         draggable="true"
+        onDragStart={(e) => onDragStart(e, equipe.id)}
         className={`flex items-center content-center cursor-pointer relative w-full rounded-xl shadow-xl [transform-style:preserve-3d] ${
           virado ? "[transform:rotateY(180deg)]" : ""
         } p-8 ${retornaHeight()} transition-all duration-700 ease-in-out`}
@@ -139,20 +141,22 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
                   </motion.div>
                 ) : (
                   <Fragment>
-                    <Image
-                      className="[backface-visibility:hidden] object-cover w-full rounded-t-lg h-full max-h-48"
-                      src={`http://127.0.0.1:8000/static/game/media/uploads/${estadio.foto}`}
-                      alt={`foto do estádio`}
-                      width={250}
-                      height={250}
-                    />
+                    {estadio?.foto && (
+                      <Image
+                        className="[backface-visibility:hidden] object-cover w-full rounded-t-lg h-full max-h-48"
+                        src={`http://127.0.0.1:8000/static/game/media/uploads/${estadio.foto}`}
+                        alt={`foto do estádio`}
+                        width={250}
+                        height={250}
+                      />
+                    )}
 
                     <p className="font-bold text-base mb-2 mt-4">{nome}</p>
                     <p className="text-sm mb-2">Fundado em: {dataFormatada}</p>
-                    <p className="text-sm mb-2">Estádio: {estadio.nome}</p>
-                    <p className="text-sm mb-2">Local: {estadio.local}</p>
+                    <p className="text-sm mb-2">Estádio: {estadio?.nome}</p>
+                    <p className="text-sm mb-2">Local: {estadio?.local}</p>
                     <p className="text-sm mb-2">
-                      Capacidade: {estadio.capacidade}
+                      Capacidade: {estadio?.capacidade}
                     </p>
 
                     <Button

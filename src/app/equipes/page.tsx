@@ -1,18 +1,16 @@
-import DuelContainer from "@/components/DuelContainer";
-import { EquipesFiltroResultado } from "@/components/EquipesFiltroResultado";
+import ContainerEquipes from "@/components/ContainerEquipes";
 import { Equipe } from "@/types/equipe";
 import { fetchWrapper } from "@/utils/fetchWrapper";
 
 export default async function Equipes() {
-  const response = await fetchWrapper<Equipe[]>("equipes");
+  const response = await fetchWrapper<{ data: Equipe[] }>("equipes");
+  console.log("API Response:", response);
+
+  const equipes = response.data; // Extraia a propriedade `data`
 
   return (
     <>
-      <DuelContainer />
-
-      <div className="h-svh bg-zinc-50 p-20">
-        <EquipesFiltroResultado equipes={response.data} />
-      </div>
+      <ContainerEquipes equipes={equipes} />
     </>
   );
 }
