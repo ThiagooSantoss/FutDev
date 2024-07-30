@@ -32,42 +32,45 @@ export const EquipesFiltroResultado = ({
   const [equipesParaMostrar, setEquipesParaMostrar] =
     useState<Equipe[]>(equipes);
 
-  useEffect(() => {
-    let equipesTemp: Equipe[] = [];
-
-    if (search.tipo === SearchTipos.Equipes) {
-      equipesTemp = equipes.filter((equipe) =>
-        equipe.nome.toLowerCase().includes(search.texto)
-      );
-
-      setEquipesParaMostrar(equipesTemp);
-      return;
-    }
-
-    if (search.tipo === SearchTipos.Treinadores) {
-      equipesTemp = equipes.filter((equipe) =>
-        equipe.treinador.toLowerCase().includes(search.texto)
-      );
-
-      setEquipesParaMostrar(equipesTemp);
-      return;
-    }
-
-    if (search.tipo === SearchTipos.Jogadores) {
-      equipesTemp = equipes.filter((equipe) => {
-        const todosJogadores = [...equipe.titulares, ...equipe.reservas];
-
-        return todosJogadores.some((jogador) =>
-          jogador.apelido.toLowerCase().includes(search.texto.toLowerCase())
-        );
-      });
-
-      setEquipesParaMostrar(equipesTemp);
-      return;
-    }
-
-    setEquipesParaMostrar(equipes);
-  }, [search, equipes]);
+    useEffect(() => {
+      const filtrarEquipes = () => {
+        if (search.texto.trim() === '') {
+          return equipes;
+        }
+    
+        return equipes.filter((equipe) => {
+          const todosJogadores = [...equipe.titulares, ...equipe.reservas];
+          const textoLower = search.texto.toLowerCase();
+    
+          const nomeEquipe = equipe.nome.toLowerCase().includes(textoLower);
+          const nomeTreinador = equipe.treinador.toLowerCase().includes(textoLower);
+          const jogadorEncontrado = todosJogadores.some((jogador) =>
+            jogador.apelido.toLowerCase().includes(textoLower)
+          );
+    
+          if (search.tipo === SearchTipos.Equipes) {
+            return nomeEquipe;
+          }
+    
+          if (search.tipo === SearchTipos.Treinadores) {
+            return nomeTreinador;
+          }
+    
+          if (search.tipo === SearchTipos.Jogadores) {
+            return jogadorEncontrado;
+          }
+    
+          if (search.tipo === SearchTipos.Geral) {
+            return nomeEquipe || nomeTreinador || jogadorEncontrado;
+          }
+    
+          return false;
+        });
+      };
+    
+      const equipesFiltradas = filtrarEquipes();
+      setEquipesParaMostrar(equipesFiltradas);
+    }, [search, equipes]);
 
   return (
     <div>

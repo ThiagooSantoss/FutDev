@@ -3,7 +3,7 @@ import { Jogador } from "@/types/jogador";
 import { fetchWrapper } from "@/utils/fetchWrapper";
 
 export default async function Jogadores() {
-  const response = await fetchWrapper<Jogador[]>("jogadores");
+  const response = await fetchWrapper<Jogador[]>("jogadores"); 
 
   return <ListaJogadores jogadores={response.data} />;
 }
