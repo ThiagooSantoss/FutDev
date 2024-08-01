@@ -14,6 +14,7 @@ export interface Jogador {
   nacionalidade: string;
   habilidades: Habilidades;
   overall: number;
+  numero: number;
 }
 
 export interface Habilidades {

@@ -21,7 +21,7 @@ export interface SearchProps {
   tipo: SearchTipos;
 }
 
-const EquipesFiltroResultado: React.FC<EquipesFiltroResultadoProps> = ({
+export const EquipesFiltroResultado: React.FC<EquipesFiltroResultadoProps> = ({
   equipes,
 }) => {
   const [search, setSearch] = useState<SearchProps>({
@@ -43,9 +43,11 @@ const EquipesFiltroResultado: React.FC<EquipesFiltroResultadoProps> = ({
         const textoLower = search.texto.toLowerCase();
 
         const nomeEquipe = equipe.nome.toLowerCase().includes(textoLower);
+
         const nomeTreinador = equipe.treinador
           .toLowerCase()
           .includes(textoLower);
+
         const jogadorEncontrado = todosJogadores.some((jogador) =>
           jogador.apelido.toLowerCase().includes(textoLower)
         );
@@ -97,5 +99,3 @@ const EquipesFiltroResultado: React.FC<EquipesFiltroResultadoProps> = ({
     </div>
   );
 };
-
-export default EquipesFiltroResultado;
