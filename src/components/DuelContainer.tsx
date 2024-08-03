@@ -2,6 +2,7 @@
 
 import React, { DragEvent, useState } from "react";
 import { Equipe } from "@/types/equipe";
+import Image from "next/image";
 
 interface DuelContainerProps {
   equipes: Equipe[];
@@ -19,6 +20,11 @@ export const DuelContainer: React.FC<DuelContainerProps> = ({ equipes }) => {
   ) => {
     const equipeId = parseInt(e.dataTransfer.getData("text/plain"), 10);
     const equipe = equipes.find((e) => e.id === equipeId);
+
+    if (equipe?.titulares.length !== NUMERO_DE_TITULARES) {
+      alert("Número de titulares inválido!");
+      return;
+    }
 
     if (equipe) {
       setEquipe(equipe);
@@ -49,10 +55,21 @@ export const DuelContainer: React.FC<DuelContainerProps> = ({ equipes }) => {
           {equipe.titulares.map((jogador) => (
             <div
               key={jogador.id}
-              className="p-2 h-10 bg-white border rounded mt-2"
+              className="flex items-center justify-between gap-4 p-2 bg-white border rounded mt-2"
             >
-              {jogador.numero} - {jogador.apelido} -{" "}
-              {Math.round(jogador.overall)}
+              <div className="flex items-center gap-3 w-96">
+                <Image
+                  className="rounded-full h-10 object-cover"
+                  src={`http://127.0.0.1:8000/static/game/media/uploads/${jogador.foto}`}
+                  alt={`foto do jogador ${jogador.apelido}`}
+                  width={40}
+                  height={40}
+                />
+                <span className="">{jogador.numero}</span>
+                <span className="">{jogador.apelido}</span>
+              </div>
+              <span>{jogador.posicoes}</span>
+              <span className="w-10">{Math.round(jogador.overall)}</span>
             </div>
           ))}
 
@@ -85,7 +102,7 @@ export const DuelContainer: React.FC<DuelContainerProps> = ({ equipes }) => {
   };
 
   return (
-    <div className="flex justify-around p-4 relative">
+    <div className="flex gap-36 justify-around mt-8 relative">
       <CardDuelo
         equipe={equipe1}
         sectionId={"section1"}

@@ -11,7 +11,7 @@ export const ContainerEquipes: React.FC<ContainerEquipesProps> = ({
   equipes,
 }) => {
   return (
-    <div>
+    <div className="mx-28">
       <EquipesFiltroResultado equipes={equipes} />
       <DuelContainer equipes={equipes} />
     </div>

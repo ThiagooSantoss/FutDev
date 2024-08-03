@@ -64,7 +64,7 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
       <div
         draggable="true"
         onDragStart={(e) => onDragStart(e, equipe.id)}
-        className={`flex items-center content-center cursor-pointer relative w-full rounded-xl shadow-xl [transform-style:preserve-3d] ${
+        className={`flex items-center content-center cursor-pointer relative w-[256px] rounded-xl shadow-xl [transform-style:preserve-3d] ${
           virado ? "[transform:rotateY(180deg)]" : ""
         } p-8 ${retornaHeight()} transition-all duration-700 ease-in-out`}
         style={retornaCoresCadastradas(cores)}

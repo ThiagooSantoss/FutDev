@@ -83,7 +83,7 @@ export const EquipesFiltroResultado: React.FC<EquipesFiltroResultadoProps> = ({
   return (
     <div>
       <SearchBar search={search} setSearch={setSearch} />
-      <ul className="flex flex-wrap gap-8">
+      <ul className="flex overflow-x-auto overflow-y-hidden gap-8 pb-4">
         {equipesParaMostrar && equipesParaMostrar.length > 0 ? (
           equipesParaMostrar.map((equipe) => (
             <EquipeCard
