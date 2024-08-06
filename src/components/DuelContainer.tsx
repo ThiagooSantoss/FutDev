@@ -14,6 +14,20 @@ export const DuelContainer: React.FC<DuelContainerProps> = ({ equipes }) => {
   const [equipe1, setEquipe1] = useState<Equipe>({} as Equipe);
   const [equipe2, setEquipe2] = useState<Equipe>({} as Equipe);
 
+  const onDuelar = () => {
+    console.log(
+      `Iniciando a partida entre ${equipe1.nome} e ${equipe2.nome}...`
+
+      // lógica para obter o overall de cada equipe
+      // iterar sobre equipe1.titulares... e obter o overall de cada jogador
+      // usar a função Math.random(n)
+      // cx_defesa = [1.3, 1.4, 1.5] => multiplicador
+      // cx_meio = [2.5, 2.7, 2.9]
+      // cx_ataque = [3.3, 3.5, 3.7]
+      // overall = overall * Math.random(3,)
+    );
+  };
+
   const handleDrop = (
     e: DragEvent<HTMLDivElement>,
     setEquipe: (equipe: Equipe) => void
@@ -102,22 +116,32 @@ export const DuelContainer: React.FC<DuelContainerProps> = ({ equipes }) => {
   };
 
   return (
-    <div className="flex gap-36 justify-around mt-8 relative">
-      <CardDuelo
-        equipe={equipe1}
-        sectionId={"section1"}
-        setEquipe={setEquipe1}
-      />
+    <div className="space-y-7">
+      <div className="flex gap-36 justify-around mt-8 relative">
+        <CardDuelo
+          equipe={equipe1}
+          sectionId={"section1"}
+          setEquipe={setEquipe1}
+        />
 
-      <button className="bg-emerald-800 p-6 rounded-full hover:bg-green-900 text-white font-semibold text-xl absolute translate-y-1/2 top-1/2">
-        Duelar
-      </button>
+        <button
+          disabled={!equipe1.id || !equipe2.id}
+          onClick={onDuelar}
+          className="bg-emerald-800 p-6 rounded-full hover:bg-green-900 text-white font-semibold text-xl absolute translate-y-1/2 top-1/2 disabled:bg-gray-600 disabled:cursor-not-allowed"
+        >
+          Duelar
+        </button>
 
-      <CardDuelo
-        equipe={equipe2}
-        sectionId={"section2"}
-        setEquipe={setEquipe2}
-      />
+        <CardDuelo
+          equipe={equipe2}
+          sectionId={"section2"}
+          setEquipe={setEquipe2}
+        />
+      </div>
+
+      <div className="hidden w-full min-h-64 p-4 bg-gray-200 border-2 border-dashed border-gray-400 rounded">
+        Resultado do Duelo
+      </div>
     </div>
   );
 };
