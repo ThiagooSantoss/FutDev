@@ -7,7 +7,7 @@ export interface Jogador {
   avatar: string;
   foto: string;
   equipe: string;
-  posicoes: string[];
+  posicoes: Posicoes;
   url_escudo: string;
   pais: string;
   codigo_iso: string;
@@ -23,4 +23,9 @@ export interface Habilidades {
   dominio: number;
   corrida: number;
   cruzamento: number;
+}
+
+export interface Posicoes {
+  nome: string;
+  grupo: string;
 }
