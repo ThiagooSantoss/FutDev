@@ -12,4 +12,5 @@ export interface Equipe {
   cores: string[];
   titulares: Jogador[];
   reservas: Jogador[];
+  overall?: number;
 }

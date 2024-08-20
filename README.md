@@ -40,6 +40,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO:
 
-- Exibir o Overall da Equipe, criar field no backend
-- Ajustar a scrollbar
+- Exibir o Overall da Equipe, criar field no backend -ok
+- Ajustar a scrollbar 
 - Ordem dos jogadores de acordo com as posições

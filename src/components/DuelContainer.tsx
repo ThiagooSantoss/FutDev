@@ -16,6 +16,8 @@ export const DuelContainer: React.FC<DuelContainerProps> = ({ equipes }) => {
   const [resultado, setResultado] = useState<string | null>(null);
 
   const calcularOverall = (equipe: Equipe) => {
+    if (!equipe.titulares || equipe.titulares.length === 0) return 0;
+
     let overallTotal = 0;
     let multiplicadores = {
       defesa: [1.3, 1.6, 1.9],
@@ -113,6 +115,8 @@ export const DuelContainer: React.FC<DuelContainerProps> = ({ equipes }) => {
           className="w-1/2 min-h-64 p-4 bg-gray-200 border-2 border-dashed border-gray-400 rounded"
         >
           <h2 className="text-center">{equipe.nome}</h2>
+          <p className="text-center">Overall: {Math.round(calcularOverall(equipe))}</p>
+
 
           {equipe.titulares.map((jogador) => (
             <div
