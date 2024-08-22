@@ -18,12 +18,14 @@ export interface Jogador {
 }
 
 export interface Habilidades {
-  chute: number;
+  ritmo: number;
+  finalizacao: number;
   passe: number;
-  dominio: number;
-  corrida: number;
-  cruzamento: number;
+  conducao: number;
+  defesa: number;
+  fisico: number;
 }
+
 
 export interface Posicoes {
   nome: string;
