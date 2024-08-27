@@ -25,41 +25,55 @@ export const DuelContainer: React.FC<DuelContainerProps> = ({ equipes }) => {
       return total + jogador.overall;
     }, 0);
 
-    // Divide pelo número de titulares para obter a média
     return overallTotal / NUMERO_DE_TITULARES;
+  };
+
+  const calcularFatorAleatorio = () => {
+    // Um valor aleatório entre -0.05 (reduz 5%) e 0.05 (aumenta 5%)
+    return Math.random() * 0.1 - 0.05;
   };
 
   const onDuelar = () => {
     const overallEquipe1 = calcularOverall(equipe1);
     const overallEquipe2 = calcularOverall(equipe2);
 
+    // Adicionando o fator aleatório ao overall das equipes
+    const overallFinalEquipe1 = overallEquipe1 * (1 + calcularFatorAleatorio());
+    const overallFinalEquipe2 = overallEquipe2 * (1 + calcularFatorAleatorio());
+
     const placares = {
       vitoria: ["1 x 0", "2 x 1", "2 x 0", "3 x 0"],
       derrota: ["0 x 1", "1 x 2", "0 x 2", "0 x 3"],
+      empate: ["0 x 0", "1 x 1", "2 x 2", "3 x 3"],
     };
 
     console.log(
       `Iniciando a partida entre ${equipe1.nome} e ${equipe2.nome}...`
     );
 
-    console.log(`Overall do ${equipe1.nome}: ${overallEquipe1.toFixed(2)}`);
-    console.log(`Overall do ${equipe2.nome}: ${overallEquipe2.toFixed(2)}`);
+    console.log(
+      `Overall do ${equipe1.nome}: ${overallFinalEquipe1.toFixed(2)}`
+    );
+    console.log(
+      `Overall do ${equipe2.nome}: ${overallFinalEquipe2.toFixed(2)}`
+    );
 
     let resultadoDuelo;
-    if (overallEquipe1 > overallEquipe2) {
+
+    const limiteEmpate = 0.5;
+
+    if (Math.abs(overallFinalEquipe1 - overallFinalEquipe2) <= limiteEmpate) {
+      const placarEmpate =
+        placares.empate[Math.floor(Math.random() * placares.empate.length)];
+      resultadoDuelo = `A partida terminou empatada! O placar foi ${placarEmpate}`;
+    } else if (overallFinalEquipe1 > overallFinalEquipe2) {
       const placar =
-        placares.vitoria[
-          Math.floor(Math.random() * placares.vitoria.length)
-        ];
+        placares.vitoria[Math.floor(Math.random() * placares.vitoria.length)];
       resultadoDuelo = `${equipe1.nome} venceu! O placar foi ${placar}`;
-    } else if (overallEquipe1 < overallEquipe2) {
-      const placar =
-        placares.derrota[
-          Math.floor(Math.random() * placares.derrota.length)
-        ];
-      resultadoDuelo = `${equipe2.nome} venceu! O placar foi ${placar}`;
     } else {
-      resultadoDuelo = "A partida terminou empatada!";
+      const placar =
+        placares.derrota[Math.floor(Math.random() * placares.derrota.length)];
+      resultadoDuelo = `${equipe2.nome} venceu! O placar foi ${placar}`;
     }
 
     setResultado(resultadoDuelo);
@@ -89,7 +103,8 @@ export const DuelContainer: React.FC<DuelContainerProps> = ({ equipes }) => {
     setEquipe: (equipe: Equipe) => void;
     equipe: Equipe;
   }) => {
-    const blocosParaCompletar = NUMERO_DE_TITULARES - (equipe.titulares?.length || 0);
+    const blocosParaCompletar =
+      NUMERO_DE_TITULARES - (equipe.titulares?.length || 0);
 
     return (
       <div
@@ -98,7 +113,9 @@ export const DuelContainer: React.FC<DuelContainerProps> = ({ equipes }) => {
         onDrop={(e) => handleDrop(e, setEquipe)}
         className="w-1/2 min-h-64 p-4 bg-gray-200 border-2 border-dashed border-gray-400 rounded"
       >
-        <h2 className="text-center">{equipe.nome || (sectionId === "section1" ? "Time 01" : "Time 02")}</h2>
+        <h2 className="text-center">
+          {equipe.nome || (sectionId === "section1" ? "Time 01" : "Time 02")}
+        </h2>
         <p className="text-center">
           Overall: {Math.round(calcularOverall(equipe))}
         </p>
