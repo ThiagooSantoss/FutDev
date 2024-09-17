@@ -44,9 +44,10 @@ export const EquipesFiltroResultado: React.FC<EquipesFiltroResultadoProps> = ({
 
         const nomeEquipe = equipe.nome.toLowerCase().includes(textoLower);
 
-        const nomeTreinador = equipe.treinador
-          .toLowerCase()
-          .includes(textoLower);
+        const nomeTreinador = equipe.treinador?.apelido
+
+          ?.toLowerCase()
+          ?.includes(textoLower);
 
         const jogadorEncontrado = todosJogadores.some((jogador) =>
           jogador.apelido.toLowerCase().includes(textoLower)

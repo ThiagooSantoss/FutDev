@@ -47,16 +47,7 @@ export const DuelContainer: React.FC<DuelContainerProps> = ({ equipes }) => {
       empate: ["0 x 0", "1 x 1", "2 x 2", "3 x 3"],
     };
 
-    // console.log(
-    //   `Iniciando a partida entre ${equipe1.nome} e ${equipe2.nome}...`
-    // );
-
-    // console.log(
-    //   `Overall do ${equipe1.nome}: ${overallFinalEquipe1.toFixed(2)}`
-    // );
-    // console.log(
-    //   `Overall do ${equipe2.nome}: ${overallFinalEquipe2.toFixed(2)}`
-    // );
+    
 
     let resultadoDuelo;
 
@@ -116,15 +107,11 @@ export const DuelContainer: React.FC<DuelContainerProps> = ({ equipes }) => {
         <h2 className="text-center">
           {equipe.nome || (sectionId === "section1" ? "Time 01" : "Time 02")}
         </h2>
-        
+
         {equipe.treinador && (
           <p className="text-center">
             Overall: {Math.round(calcularOverall(equipe))}
           </p>
-        )}
-
-        {equipe.treinador && (
-          <p className="text-center">Treinador: {equipe.treinador}</p>
         )}
 
         {equipe.titulares?.map((jogador) => (
@@ -151,6 +138,19 @@ export const DuelContainer: React.FC<DuelContainerProps> = ({ equipes }) => {
         {Array.from({ length: blocosParaCompletar }).map((_, index) => (
           <div key={index} className="p-2 h-10 bg-white border rounded mt-2" />
         ))}
+
+        {equipe.treinador && (
+          <div className="flex items-center gap-3 mt-2 p-2 bg-gray-400 border rounded">
+            <Image
+              className="rounded-full h-10 object-cover"
+              src={`http://127.0.0.1:8000/static/game/media/uploads/${equipe.treinador.foto}`}
+              alt={`foto do treinador ${equipe.treinador.apelido}`}
+              width={40}
+              height={40}
+            />
+            <p className="text-center">Treinador: {equipe.treinador.apelido}</p>
+          </div>
+        )}
       </div>
     );
   };

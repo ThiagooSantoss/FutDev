@@ -127,7 +127,7 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
                           ))}
                         </ul>
                         <h6 className="font-bold text-2xl mb-2">Treinador</h6>
-                        <span className="block mb-4">{equipe.treinador}</span>
+                        <span className="block mb-4">{equipe.treinador.apelido}</span>
                       </div>
                     </div>
                     <Button
