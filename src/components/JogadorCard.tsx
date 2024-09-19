@@ -6,10 +6,11 @@ import ReactCountryFlag from "react-country-flag";
 
 interface JogadorCardProps {
   jogador: Jogador;
+  tamanho?: "sm" | "md" | "lg";
 }
 
 export const JogadorCard = (props: JogadorCardProps) => {
-  const { jogador } = props;
+  const { jogador, tamanho = "lg" } = props;
 
   const habilidades = jogador.habilidades;
   const habilidadesKeys = Object.keys(habilidades);
@@ -18,12 +19,22 @@ export const JogadorCard = (props: JogadorCardProps) => {
     return nomeHabilidade.slice(0, 3).toUpperCase();
   }
 
+  let width = 0;
+
+  if (tamanho === "sm") {
+    width = 150;
+  } else if (tamanho === "md") {
+    width = 300;
+  } else {
+    width = 400;
+  }
+
   return (
     <div className="relative">
       <Image
         src={cardJogador}
         alt={"Card do jogador"}
-        width={400}
+        width={width}
         height={400}
       />
 
