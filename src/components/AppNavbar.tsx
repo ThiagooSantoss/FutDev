@@ -16,6 +16,10 @@ export const AppNavbar = () => {
       texto: "Início",
     },
     {
+      link: "/cadastros",
+      texto: "Cadastros",
+    },
+    {
       link: "/sobre",
       texto: "Sobre",
     },
