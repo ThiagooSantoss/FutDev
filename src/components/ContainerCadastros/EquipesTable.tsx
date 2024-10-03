@@ -6,10 +6,10 @@ import Image from "next/image";
 import { converteDataFull } from "@/utils/converteDataFull";
 
 interface ContainerEquipesProps {
-  equipes: Equipe[];
+  dados: Equipe[];
 }
 
-export const DefaultTable: React.FC<ContainerEquipesProps> = ({ equipes }) => {
+export const EquipesTable: React.FC<ContainerEquipesProps> = ({ dados }) => {
   return (
     <div className="overflow-x-auto">
       <Table>
@@ -23,14 +23,14 @@ export const DefaultTable: React.FC<ContainerEquipesProps> = ({ equipes }) => {
           </Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {equipes?.map((equipe) => (
+          {dados?.map((dados) => (
             <Table.Row
-              key={equipe.id}
+              key={dados.id}
               className="bg-white dark:border-gray-700 dark:bg-gray-800"
             >
               <Table.Cell>
                 <Image
-                  src={`http:127.0.0.1:8000/static/game/media/uploads/${equipe.foto}`}
+                  src={`http:127.0.0.1:8000/static/game/media/uploads/${dados.foto}`}
                   alt={`foto do escudo`}
                   width={55}
                   height={55}
@@ -38,25 +38,27 @@ export const DefaultTable: React.FC<ContainerEquipesProps> = ({ equipes }) => {
               </Table.Cell>
 
               <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                {equipe.nome}
+                {dados.nome}
               </Table.Cell>
 
-              <Table.Cell className="flex">
-                {equipe.cores.map((cor) => (
-                  <div
-                    key={cor}
-                    style={{
-                      backgroundColor: cor,
-                      width: "25px",
-                      height: "25px",
-                      border: "1px solid #000",
-                      borderRadius: "50%",
-                    }}
-                  ></div>
-                ))}
+              <Table.Cell>
+                <div className="flex items-center gap-1">
+                  {dados.cores.map((cor) => (
+                    <div
+                      key={cor}
+                      style={{
+                        backgroundColor: cor,
+                        width: "25px",
+                        height: "25px",
+                        border: "1px solid #000",
+                        borderRadius: "50%",
+                      }}
+                    ></div>
+                  ))}
+                </div>
               </Table.Cell>
 
-              <Table.Cell>{converteDataFull(equipe.fundacao)}</Table.Cell>
+              <Table.Cell>{converteDataFull(dados.fundacao)}</Table.Cell>
               <Table.Cell>
                 <a
                   href="#"

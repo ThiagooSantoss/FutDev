@@ -7,12 +7,11 @@ interface ListaJogadoresProps {
 export const ListaJogadores = (props: ListaJogadoresProps) => {
   const { jogadores } = props;
   console.log(jogadores);
-  
 
   return (
     <ul className="flex flex-wrap gap-8 p-20">
       {jogadores.map((jogador) => (
-        <JogadorCard key={jogador.id} jogador={jogador} />
+        <JogadorCard key={jogador.id} jogador={jogador} tamanho={"lg"} />
       ))}
     </ul>
   );
