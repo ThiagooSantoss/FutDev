@@ -1,6 +1,9 @@
 "use client";
 
 import { EquipesTable } from "@/components/ContainerCadastros/EquipesTable";
+import { EstadiosTable } from "@/components/ContainerCadastros/EstadiosTable";
+import { JogadoresTable } from "@/components/ContainerCadastros/JogadoresTable";
+
 import { SelectMenu } from "@/components/ContainerCadastros/SelectMenu";
 import { Equipe } from "@/types/equipe";
 import { Estadio } from "@/types/estadio";
@@ -40,7 +43,15 @@ export const ContainerCadastros = () => {
         selectMenuValue={selectMenuValue}
         setSelectMenuValue={setSelectMenuValue}
       />
-      {selectMenuValue === "Equipes" && <EquipesTable dados={resultado as Equipe[]} />}
+      {selectMenuValue === "Equipes" && (
+        <EquipesTable dados={resultado as Equipe[]} />
+      )}
+      {selectMenuValue === "Estádios" && (
+        <EstadiosTable dados={resultado as Estadio[]} />
+      )}
+      {selectMenuValue === "Jogadores" && (
+        <JogadoresTable dados={resultado as Jogador[]} />
+      )}
     </>
   );
 };

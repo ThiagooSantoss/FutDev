@@ -1,6 +1,7 @@
 export interface Estadio {
-    nome: string;
-    local: string;
-    capacidade: number;
-    foto: string;
-  }
+  id: number;
+  nome: string;
+  local: string;
+  capacidade: number;
+  foto: string;
+}

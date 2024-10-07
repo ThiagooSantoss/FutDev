@@ -1,23 +1,22 @@
 "use client";
 
-import { Equipe } from "@/types/equipe";
 import { Table } from "flowbite-react";
 import Image from "next/image";
-import { converteDataFull } from "@/utils/converteDataFull";
+import { Estadio } from "@/types/estadio";
 
-interface ContainerEquipesProps {
-  dados: Equipe[];
+interface ContainerEstadiosProps {
+  dados: Estadio[];
 }
 
-export const EquipesTable: React.FC<ContainerEquipesProps> = ({ dados }) => {
+export const EstadiosTable: React.FC<ContainerEstadiosProps> = ({ dados }) => {
   return (
     <div className="overflow-x-auto">
       <Table>
         <Table.Head>
-          <Table.HeadCell>Escudo</Table.HeadCell>
-          <Table.HeadCell>Equipe</Table.HeadCell>
-          <Table.HeadCell>Cores</Table.HeadCell>
-          <Table.HeadCell>Fundação</Table.HeadCell>
+          <Table.HeadCell>Foto</Table.HeadCell>
+          <Table.HeadCell>Nome</Table.HeadCell>
+          <Table.HeadCell>Capacidade</Table.HeadCell>
+          <Table.HeadCell>Local</Table.HeadCell>
           <Table.HeadCell>
             <span className="sr-only">Edit</span>
           </Table.HeadCell>
@@ -31,7 +30,7 @@ export const EquipesTable: React.FC<ContainerEquipesProps> = ({ dados }) => {
               <Table.Cell>
                 <Image
                   src={`http:127.0.0.1:8000/static/game/media/uploads/${dados.foto}`}
-                  alt={`foto do escudo`}
+                  alt={`foto do estadio`}
                   width={55}
                   height={55}
                 />
@@ -41,24 +40,9 @@ export const EquipesTable: React.FC<ContainerEquipesProps> = ({ dados }) => {
                 {dados.nome}
               </Table.Cell>
 
-              <Table.Cell>
-                <div className="flex items-center gap-1">
-                  {dados.cores?.map((cor) => (
-                    <div
-                      key={cor}
-                      style={{
-                        backgroundColor: cor,
-                        width: "25px",
-                        height: "25px",
-                        border: "1px solid #000",
-                        borderRadius: "50%",
-                      }}
-                    ></div>
-                  ))}
-                </div>
-              </Table.Cell>
+              <Table.Cell>{dados.capacidade}</Table.Cell>
 
-              <Table.Cell>{converteDataFull(dados.fundacao)}</Table.Cell>
+              <Table.Cell>{dados.local}</Table.Cell>
               <Table.Cell>
                 <a
                   href="#"
