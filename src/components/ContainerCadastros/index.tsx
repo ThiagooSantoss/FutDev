@@ -13,8 +13,10 @@ interface ContainerEquipesProps {
 }
 
 export const ContainerCadastros = () => {
-  const [selectMenuValue, setSelectMenuValue] = useState("Selecione");
-  const [equipes, setEquipes] = useState([]);
+  const [selectMenuValue, setSelectMenuValue] = useState("Equipes");
+  const [resultado, setResultado] = useState<Equipe[] | Estadio[] | Jogador[]>(
+    []
+  );
 
   async function fetchData() {
     let response;
@@ -25,7 +27,7 @@ export const ContainerCadastros = () => {
     } else if (selectMenuValue === "Jogadores") {
       response = await fetchWrapper<Jogador[]>("jogadores");
     }
-    setEquipes(response.data);
+    setResultado(response?.data || []);
   }
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export const ContainerCadastros = () => {
         selectMenuValue={selectMenuValue}
         setSelectMenuValue={setSelectMenuValue}
       />
-      {selectMenuValue === "Equipes" && <EquipesTable dados={equipes} />}
+      {selectMenuValue === "Equipes" && <EquipesTable dados={resultado as Equipe[]} />}
     </>
   );
 };
