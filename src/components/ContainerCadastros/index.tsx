@@ -21,20 +21,24 @@ export const ContainerCadastros = () => {
     []
   );
 
-  async function fetchData() {
+  async function fetchData(savedItem: string) {
     let response;
-    if (selectMenuValue === "Equipes") {
+    if (savedItem === "Equipes") {
       response = await fetchWrapper<Equipe[]>("equipes");
-    } else if (selectMenuValue === "Estádios") {
+    } else if (savedItem === "Estádios") {
       response = await fetchWrapper<Estadio[]>("estadios");
-    } else if (selectMenuValue === "Jogadores") {
+    } else if (savedItem === "Jogadores") {
       response = await fetchWrapper<Jogador[]>("jogadores");
     }
     setResultado(response?.data || []);
   }
 
   useEffect(() => {
-    fetchData();
+    const savedItem = localStorage.getItem("selectedItem");
+    if (savedItem) {
+      setSelectMenuValue(savedItem);
+    }
+    fetchData(savedItem || "Equipes");
   }, [selectMenuValue]);
 
   return (
