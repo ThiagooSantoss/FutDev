@@ -50,7 +50,9 @@ export const AppNavbar = () => {
           <Navbar.Link
             key={linkItem.link}
             active={pathName === linkItem.link}
-            className="text-white hover:text-black"
+            className={`text-white ${
+              pathName != linkItem.link ? "md:hover:text-yellow-200" : ""
+            } ${pathName === linkItem.link ? "md:text-[#062114]" : ""}`}
             href={linkItem.link}
           >
             {linkItem.texto}

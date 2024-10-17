@@ -156,7 +156,7 @@ export const EquipeCard: React.FC<EquipeCardProps> = (
                     <p className="text-sm mb-2">Estádio: {estadio?.nome}</p>
                     <p className="text-sm mb-2">Local: {estadio?.local}</p>
                     <p className="text-sm mb-2">
-                      Capacidade: {estadio?.capacidade}
+                      Capacidade: {estadio?.capacidade.toLocaleString("pt-BR")}
                     </p>
 
                     <Button

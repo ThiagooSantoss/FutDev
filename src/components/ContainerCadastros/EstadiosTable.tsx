@@ -5,10 +5,13 @@ import Image from "next/image";
 import { Estadio } from "@/types/estadio";
 
 interface ContainerEstadiosProps {
-  dados: Estadio[];
+  estadios: Estadio[];
 }
 
-export const EstadiosTable: React.FC<ContainerEstadiosProps> = ({ dados }) => {
+export const EstadiosTable: React.FC<ContainerEstadiosProps> = ({
+  estadios
+}) => {
+ 
   return (
     <div className="overflow-x-auto">
       <Table>
@@ -22,14 +25,14 @@ export const EstadiosTable: React.FC<ContainerEstadiosProps> = ({ dados }) => {
           </Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {dados?.map((dados) => (
+          {estadios?.map((estadio) => (
             <Table.Row
-              key={dados.id}
+              key={estadio.id}
               className="bg-white dark:border-gray-700 dark:bg-gray-800"
             >
               <Table.Cell>
                 <Image
-                  src={`http:127.0.0.1:8000/static/game/media/uploads/${dados.foto}`}
+                  src={`http:127.0.0.1:8000/static/game/media/uploads/${estadio.foto}`}
                   alt={`foto do estadio`}
                   width={55}
                   height={55}
@@ -37,12 +40,12 @@ export const EstadiosTable: React.FC<ContainerEstadiosProps> = ({ dados }) => {
               </Table.Cell>
 
               <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                {dados.nome}
+                {estadio.nome}
               </Table.Cell>
 
-              <Table.Cell>{dados.capacidade}</Table.Cell>
+              <Table.Cell>{estadio.capacidade.toLocaleString("pt-BR")}</Table.Cell>
 
-              <Table.Cell>{dados.local}</Table.Cell>
+              <Table.Cell>{estadio.local}</Table.Cell>
               <Table.Cell>
                 <a
                   href="#"

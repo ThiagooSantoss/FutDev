@@ -51,7 +51,7 @@ export const ContainerCadastros = () => {
         <EquipesTable dados={resultado as Equipe[]} />
       )}
       {selectMenuValue === "Estádios" && (
-        <EstadiosTable dados={resultado as Estadio[]} />
+        <EstadiosTable estadios={resultado as Estadio[]} />
       )}
       {selectMenuValue === "Jogadores" && (
         <JogadoresTable dados={resultado as Jogador[]} />
